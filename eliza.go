@@ -30,7 +30,7 @@ func requestHandler(w http.ResponseWriter, r *http.Request) {
 //Adapted from https://www.socketloop.com/tutorials/golang-jquery-ajax-post-data-to-server-and-send-data-back-to-client-example
 func recieveAjax(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
-		userResponce := r.FormValue("data") //Get the data from the input field in the chat html
+		userResponce := r.FormValue("responce") //Get the data from the input field in the chat html
 		fmt.Fprint(w, elizaResponce(userResponce))
 	}
 }
@@ -119,7 +119,7 @@ func elizaResponce(userResponce string) string {
 
 	//Loop over the array, adapted from https://gobyexample.com/range and Labs
 	for _, num := range responces {
-		//This sould generate a random responce from the responces ive listed above
+		//This should generate a random responce from the responces ive listed above
 		row := rand.Intn(len(num))
 
 		re := regexp.MustCompile(`(?i)` + responces[count][0])
@@ -127,5 +127,6 @@ func elizaResponce(userResponce string) string {
 			return re.ReplaceAllString(userResponce, responces[count][row])
 		}
 	}
+	//If nothing matched return this
 	return "I do not understand can you rephrase that?"
 }

@@ -1,42 +1,64 @@
-<!doctype html>
+<!--Data Representation Project-->
+<!--Colm Woodlock-->
+<!--G00341460-->
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Hello, world!</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-	<style>
-		body {padding-top: 60px, padding-bottom: 60px}};
-	</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
   </head>
   <body>
-
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <h1>dsfdf</h1>  <!-- place holder before i add padding as you cant see text unless this is here -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<a class="navbar-brand" href="#">Eliza</a>
 	</nav>
+        <div id="chatbox">
+          <ul id="list"></ul>
+            <form id="inputform" align="middle" action="change" method="GET">
 
-	<ul class="list-group">
-		<li class="list-group-item ">Dapibus ac facilisis in</li>
-		<li class="list-group-item list-group-item-primary text-right">This is a primary list group item</li>
-	`</ul>
+              <!--This is the input box styled with bootstrap-->
+              <div class="fixed-bottom bg-dark text-white">
+            		<form>
+            			<div class="form-group">
+            			<label for="userInput">Say something to eliza</label>
+            			<input type="text" class="form-control" id="userinput" aria-describedby="userInputHelp" placeholder="Enter text..">
+            			<small id="userInputHelp" class="form-text text-muted">confidential</small>
+            			</div>
+            		</form>
+            	</div>
 
-	<div class="fixed-bottom bg-dark text-white">
-		<form>
-			<div class="form-group">
-			<label for="userInput">Say something to eliza</label>
-			<input type="text" class="form-control" id="userInput" aria-describedby="userInputHelp" placeholder="Enter text..">
-			<small id="userInputHelp" class="form-text text-muted">confidential</small>
-			</div>
-		</form>
-	</div>
+        </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <!--adapted from https://www.socketloop.com/tutorials/golang-jquery-ajax-post-data-to-server-and-send-data-back-to-client-example-->
+    <script>
+      var q = "";
+        $("#inputform").submit(function(event) {
+
+          $.ajax({
+            url: 'ajax',
+            type: 'post',
+            dataType: 'html',
+            data : {
+              responce: $("#userinput").val()
+            },
+            success: function(test){
+              q = test;
+              $("#list").append('<div id="UserTalks"  align="right">' + $("#userinput").val() +'</div><br/><br/><div id="ElizaTalks" align="left" >'+ q +'</div><br/><br/>'); //When you enter something put it on the right hand side of the screen and when eliza talks put it on the left
+              $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight); //Push chat to top of xhat box
+              $("#inputform").trigger('reset'); //Clears input box
+            }
+          });
+          event.preventDefault();
+        })
+    </script>
+
   </body>
 </html>
