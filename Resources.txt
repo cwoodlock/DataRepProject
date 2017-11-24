@@ -1,0 +1,2 @@
+https://golang.org/pkg/net/http/
+https://www.socketloop.com/tutorials/golang-jquery-ajax-post-data-to-server-and-send-data-back-to-client-example
