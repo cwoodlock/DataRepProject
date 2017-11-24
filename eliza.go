@@ -14,6 +14,7 @@ import (
   "text/template"
 )
 
+//Main function
 func main() {
     http.Handle("/", http.FileServer(http.Dir("./")))
     http.HandleFunc("/", requestHandler)
@@ -22,8 +23,7 @@ func main() {
     http.ListenAndServe(":8080, nil")
 }
 
-func templateHandler(w http.ResponseWriter, r *http.Request){
-  t, _ := templateHandler("chat.html")
+func requestHandler(w http.ResponseWriter, r *http.Request){
+  t, _ := requestHandler("chat.html")
   t.Execute(w, t)
 }
-
