@@ -15,7 +15,7 @@ import (
 func main() {
 
 	http.Handle("/", http.FileServer(http.Dir("./")))
-	http.HandleFunc("/", requestHandler)
+	http.HandleFunc("/index", requestHandler)
 	http.HandleFunc("/ajax", recieveAjax)
 
 	http.ListenAndServe(":8080", nil)
@@ -35,5 +35,5 @@ func recieveAjax(w http.ResponseWriter, r *http.Request) {
 }
 
 func elizaResponce(userResponce string) string {
-
+	return "hello"
 }
