@@ -8,7 +8,9 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"math/rand"
 	"net/http"
+	"regexp"
 )
 
 //Main function
@@ -34,6 +36,7 @@ func recieveAjax(w http.ResponseWriter, r *http.Request) {
 }
 
 func elizaResponce(userResponce string) string {
+	var count int
 	var responces = [][]string{
 		{`(?i)^\s*I need ([^.!?]*)[.!?]*\s*$`,
 			"Why do you need $1?",
@@ -100,6 +103,29 @@ func elizaResponce(userResponce string) string {
 			"Tell me more about your friends.",
 			"When you think of a friend, what comes to mind?",
 			"Did you have many childhood friends?"},
+
+		{`^([^.!?]*)[.!?]?.*$`,
+			"Please tell me more.",
+			"Let's change focus a bit... Tell me about your family.",
+			"Can you elaborate on that?",
+			"Why do you say that $1?",
+			"I see.",
+			"Very interesting.",
+			"$1?",
+			"I see. And what does that tell you?",
+			"How does that make you feel?",
+			"How do you feel when you say that?"},
 	}
 
+	//Loop over the array, adapted from https://gobyexample.com/range and Labs
+	for _, num := range responces {
+		//This sould generate a random responce from the responces ive listed above
+		row := rand.Intn(len(num))
+
+		re := regexp.MustCompile(`(?i)` + responces[count][0])
+		if matched := re.MatchString(userResponce); matched {
+			return re.ReplaceAllString(userResponce, responces[count][row])
+		}
+	}
+	return "I do not understand can you rephrase that?"
 }
