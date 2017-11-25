@@ -3,3 +3,5 @@ https://www.socketloop.com/tutorials/golang-jquery-ajax-post-data-to-server-and-
 https://golang.org/pkg/html/template/
 https://golang.org/doc/effective_go.html#blank
 https://gobyexample.com/range
+https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/
+https://www.youtube.com/watch?v=Ku9TQf-JSGc&list=PLHPcpp4e3JVpXbtgyD-k-nCmwpbbMIHOh
